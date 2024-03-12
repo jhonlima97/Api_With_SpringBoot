@@ -2,48 +2,42 @@ package com.api.crud.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "user")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
 
-    private String nombre;
+    private String firstName;
+    private String lastName;
     private String email;
-    private Integer prioridad;
 
-    public void setPrioridad(Integer prioridad){
-        this.prioridad = prioridad;
-    }
-
-    public Integer getPrioridad(){
-        return prioridad;
-    }
-
+    // ctrl + .  para crear los getters and setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getNombre() {
-        return nombre;
+    public String getFirstName() {
+        return firstName;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
-
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
+    
 }

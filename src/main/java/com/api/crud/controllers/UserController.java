@@ -9,36 +9,36 @@ import com.api.crud.models.UserModel;
 import com.api.crud.services.UserService;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
 
     @GetMapping()
-    public ArrayList<UserModel> obtenerUsuarios() {
-        return userService.obtenerUsuarios();
+    public ArrayList<UserModel> getUsers() {
+        return this.userService.getUsers();
     }
 
     @PostMapping()
-    public UserModel guardarUsuario(@RequestBody UserModel usuario) {
-        return this.userService.guardarUsuario(usuario);
+    public UserModel saveUser(@RequestBody UserModel user) {
+        return this.userService.saveUser(user);
     }
 
     @GetMapping( path = "/{id}")
-    public Optional<UserModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
-        return this.userService.obtenerPorId(id);
+    public Optional<UserModel> getUserById(@PathVariable("id") Long id) {
+        return this.userService.getById(id);
     }
 
-    @GetMapping("/query")
-    public ArrayList<UserModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
-        return this.userService.obtenerPorPrioridad(prioridad);
+    @PutMapping( path = "/{id}")
+    public UserModel updateUserById(@RequestBody UserModel request, @PathVariable("id") Long id) {
+        return this.userService.updateById(request, id);
     }
 
     @DeleteMapping( path = "/{id}")
-    public String eliminarPorId(@PathVariable("id") Long id){
-        boolean ok = this.userService.eliminarUsuario(id);
+    public String deleteById(@PathVariable("id") Long id){
+        boolean ok = this.userService.deleteUser(id);
         if (ok){
-            return "Se eliminó el usuario con id " + id;
+            return "User with id " + id + " deleted";
         }else{
             return "No pudo eliminar el usuario con id" + id;
         }
