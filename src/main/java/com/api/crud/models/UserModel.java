@@ -12,6 +12,11 @@ public class UserModel {
     private String firstName;
     private String lastName;
     private String email;
+    ///added news attributes
+    @Column(unique=true)
+    private String dni;
+    private String phone;
+    private Boolean status;
 
     // ctrl + .  para crear los getters and setters
     public Long getId() {
@@ -38,6 +43,22 @@ public class UserModel {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    
+    public String getDni() {
+        return dni;
+    }
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public Boolean getStatus() {
+        return status;
+    }
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 }

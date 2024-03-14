@@ -11,10 +11,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    // Service for obtener todos los usuarios
     public ArrayList<UserModel> getUsers(){
         return (ArrayList<UserModel>) userRepository.findAll();
     }
-     
+    
+    // Service for guardar un usuario
     public UserModel saveUser(UserModel user){
         if (user == null) {
             return null;
@@ -22,6 +24,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // Service for obtener un usuario por ID
     public Optional<UserModel> getById(Long id){
         if (id == null) {
             return null;
@@ -29,6 +32,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    // Service for editar un usuario
     public UserModel updateById(UserModel request, Long id) {
         if (request == null || id == null) {
             return null;
@@ -39,13 +43,18 @@ public class UserService {
             user.setFirstName(request.getFirstName());
             user.setLastName(request.getLastName());
             user.setEmail(request.getEmail());
+            user.setDni(request.getDni());
+            user.setPhone(request.getPhone());
+            user.setStatus(request.getStatus());
+
             userRepository.save(user);
             return user;
         } else {
             return null;
         }
-    }    
+    }
 
+    // Service for eliminar un usuario
     public boolean deleteUser(Long id) {
         if (id == null) {
             return false;
