@@ -16,26 +16,34 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    // Función para validar el DNI
+    private boolean isValidDni(String dni) {
+        return dni.matches("[1-9][0-9]{7}") && !dni.equals("00000000");
+    }
+
     // EndPoint for obtener todos los users
     @GetMapping()
     public ArrayList<UserModel> getUsers() {
         return this.userService.getUsers();
     }
 
+    // EndPoint for obtener un usuario por ID
+    @GetMapping( path = "/{id}")
+    public Optional<UserModel> getUserById(@PathVariable("id") Long id) {
+        return this.userService.getById(id);
+    }
+
     // EndPoint for guardar un user, se valida el dni
     @PostMapping()
     public ResponseEntity<?> saveUser(@RequestBody UserModel user) {
+        if (!isValidDni(user.getDni())) {
+            return new ResponseEntity<>("DNI inválido.", HttpStatus.BAD_REQUEST);
+        }
         try {
             return new ResponseEntity<>(this.userService.saveUser(user), HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>("DNI Existente.", HttpStatus.CONFLICT);
         }
-    }
-
-    // EndPoint for obtener un usuario por ID
-    @GetMapping( path = "/{id}")
-    public Optional<UserModel> getUserById(@PathVariable("id") Long id) {
-        return this.userService.getById(id);
     }
 
     // EndPoint for editar un usuario
@@ -55,5 +63,4 @@ public class UserController {
         }
     }
 
-    
 }

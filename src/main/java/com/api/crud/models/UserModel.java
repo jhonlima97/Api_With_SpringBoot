@@ -8,13 +8,16 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(length = 50)
     private String firstName;
+    @Column(length = 50)
     private String lastName;
+    @Column(length = 30)
     private String email;
     ///added news attributes
-    @Column(unique=true)
+    @Column(unique=true, length = 8)
     private String dni;
+    @Column(length = 9)
     private String phone;
     private Boolean status;
 

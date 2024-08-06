@@ -16,13 +16,22 @@ public class UserService {
         return (ArrayList<UserModel>) userRepository.findAll();
     }
     
-    // Service for guardar un usuario
+    // Service for saved un usuario
     public UserModel saveUser(UserModel user){
         if (user == null) {
             return null;
         }
         return userRepository.save(user);
     }
+
+    // Service for saved at user
+    // public String saveUser(UserModel user){
+    //     if (user == null) {
+    //         return "User is null.";
+    //     }
+    //     userRepository.save(user);
+    //     return "User added successfully.";
+    // }
 
     // Service for obtener un usuario por ID
     public Optional<UserModel> getById(Long id){
